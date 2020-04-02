@@ -13,7 +13,7 @@ void Game::collion()
 	{
 		if (player.getBounds().contains(guys[x].getBadGuy().getPosition()))
 		{
-			guys[x].isAlive(false);
+			guys.erase(guys.begin() + x);
 		}
 	}
 }
@@ -65,9 +65,8 @@ void Game::update()
 	for (unsigned x = 0; x < guys.size(); x++)
 	{
 		collion();
-		if (guys[x].getAlive() == false)
+		if (guys.size() == 0)
 		{
-			guys[x].isAlive(true);
 			guys.push_back(BadGuys());
 		}
 		else
