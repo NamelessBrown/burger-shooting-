@@ -9,17 +9,11 @@ void Game::initWindow()
 
 void Game::collion()
 {
-	for (unsigned x = 0; x < guys.size(); x++)
-	{
-		if (player.getBounds().contains(guys[x].getBadGuy().getPosition()))
-		{
-			guys.erase(guys.begin() + x);
-		}
-	}
+	
 }
 
 Game::Game()
-	:m_running(true), m_rKey(false)
+	:m_running(true)
 {
 	initWindow();
 	guys.push_back(BadGuys());
@@ -44,12 +38,12 @@ void Game::pollEvent()
 			window->close();
 			break;
 		case sf::Event::KeyPressed:
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
-				player.reload(m_rKey);
-			m_rKey = true;
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
+			{
+				
+			}
 			break;
 		case sf::Event::KeyReleased:
-			m_rKey = false;
 			break;
 		}
 		
@@ -65,8 +59,9 @@ void Game::update()
 	for (unsigned x = 0; x < guys.size(); x++)
 	{
 		collion();
-		if (guys.size() == 0)
+		if (guys.size() == 0 || guys[x].getBadGuy().getPosition().x > window->getSize().x)
 		{
+			guys.erase(guys.begin() + x);
 			guys.push_back(BadGuys());
 		}
 		else

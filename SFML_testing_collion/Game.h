@@ -8,7 +8,6 @@ class Game
 {
 private:
 	bool m_running;
-	bool m_rKey;
 
 	sf::RenderWindow* window;
 	sf::Event event;
