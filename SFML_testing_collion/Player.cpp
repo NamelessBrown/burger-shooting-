@@ -8,11 +8,13 @@ Player::Player()
 	player.setSize(sf::Vector2f(25.5f, 25.5f));
 	player.setPosition(sf::Vector2f(0.f, 250.f));
 
+	bullet.setFillColor(sf::Color::Red);
+	bullet.setSize(player.getSize() / 2.f);
+	bullet.setPosition(player.getPosition());
+	//bullet.setScale(bullet.getScale() / 4.f);
+	//bullet.setPosition(player.getPosition());
+
 	m_font.loadFromFile("timesnewroman.ttf");
-
-	bullets.reserve(25);
-
-	m_maxBullets = bullets.capacity();
 
 	m_text.setFont(m_font);
 	m_text.setFillColor(sf::Color::Yellow);
@@ -39,29 +41,15 @@ void Player::bulletMovement()
 	{
 		m_shots++;
 		player.setFillColor(sf::Color::Blue);
-
-		sf::CircleShape bullet;
-		bullet.setFillColor(sf::Color::Red);
-		bullet.setRadius(40);
-		bullet.setOrigin(sf::Vector2f(bullet.getRadius() - bullet.getRadius(), 0.0f));
-		bullet.setScale(bullet.getScale() / 4.f);
 		bullet.setPosition(player.getPosition());
-		bullets.push_back(bullet);
 	}
 	else
 	{
 		player.setFillColor(sf::Color::Yellow);
 	}
 
-	if (bullets.size() >= m_maxBullets)
-	{
-		m_canReload = true;
-		m_shots = 0;
-	}
-
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::R) && m_canReload)
 	{
-		bullets.clear();
 		m_canReload = false;
 	}
 
@@ -74,7 +62,7 @@ void Player::update()
 
 	std::stringstream ss;
 	ss << "Armor = " << m_armor << '\n' << "Speed = " << m_speed << '\n' << "Attack Damage = " << m_attackDamage << '\n' << "Hp = " << m_hp << '\n'
-		<< "Lazer beans you shot: " << m_shots << '\n' << "Lazer bean cap = " << m_maxBullets << '\n' << "Hit the R button for reload" << '\n';
+		<< "Lazer beans you shot: " << m_shots << '\n';
 
 	m_text.setString(ss.str());
 
@@ -84,13 +72,10 @@ void Player::render(sf::RenderTarget& target)
 {
 	target.draw(m_text);
 
-	for (auto& e : bullets)
+	while (bullet.getPosition().x < target.getSize().x)
 	{
-		while (e.getPosition().x < target.getSize().x)
-		{
-			e.move(sf::Vector2f(m_speed, 0.0f));
-			target.draw(e);
-		}
+		bullet.move(sf::Vector2f(m_speed, 0.0f));
+		target.draw(bullet);
 	}
 
 	target.draw(player);
