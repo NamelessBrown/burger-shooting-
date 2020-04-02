@@ -2,6 +2,7 @@
 
 #include <cmath>
 #include "Player.h"
+#include "BadGuys.h"
 
 class Game
 {
