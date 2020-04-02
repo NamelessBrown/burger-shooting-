@@ -6,7 +6,7 @@ Player::Player()
 
 	player.setFillColor(sf::Color::Yellow);
 	player.setSize(sf::Vector2f(25.5f, 25.5f));
-	player.setPosition(sf::Vector2f(250.f, 250.f));
+	player.setPosition(sf::Vector2f(0.f, 250.f));
 
 	m_font.loadFromFile("timesnewroman.ttf");
 
@@ -20,29 +20,13 @@ Player::Player()
 
 }
 
-void Player::reload(bool& hitkey)
-{
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R) && m_canReload && !hitkey)
-	{
-		bullets.clear();
-	}
-}
-
 void Player::movement()
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-	{
-		player.move(sf::Vector2f(-m_speed, 0.f));
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-	{
-		player.move(sf::Vector2f(m_speed, 0.f));
-	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
 		player.move(sf::Vector2f(0.f, -m_speed));
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 	{
 		player.move(sf::Vector2f(0.f, m_speed));
 	}
@@ -54,11 +38,13 @@ void Player::bulletMovement()
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !m_canReload)
 	{
 		m_shots++;
-		player.setFillColor(sf::Color::Red);
+		player.setFillColor(sf::Color::Blue);
+
 		sf::CircleShape bullet;
 		bullet.setFillColor(sf::Color::Red);
 		bullet.setRadius(40);
 		bullet.setOrigin(sf::Vector2f(bullet.getRadius() - bullet.getRadius(), 0.0f));
+		bullet.setScale(bullet.getScale() / 4.f);
 		bullet.setPosition(player.getPosition());
 		bullets.push_back(bullet);
 	}
@@ -67,17 +53,17 @@ void Player::bulletMovement()
 		player.setFillColor(sf::Color::Yellow);
 	}
 
-	if (bullets.size() > m_maxBullets)
+	if (bullets.size() >= m_maxBullets)
 	{
 		m_canReload = true;
 		m_shots = 0;
 	}
-	else
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::R) && m_canReload)
 	{
+		bullets.clear();
 		m_canReload = false;
 	}
-
-	
 
 }
 

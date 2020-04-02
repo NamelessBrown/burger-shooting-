@@ -3,7 +3,6 @@
 #include <SFML/Graphics.hpp>
 #include <sstream>
 #include <limits>
-#include <iostream>
 #include <vector>
 
 class Player
@@ -11,10 +10,9 @@ class Player
 public:
 	Player();
 
-	void reload(bool& hitkey);
-
 	const sf::FloatRect getBounds() const { return player.getGlobalBounds(); }
 	const sf::RectangleShape getPlayer() const { return player; }
+	const std::vector<sf::CircleShape> getBullets() const { return bullets; }
 
 	void update();
 	void render(sf::RenderTarget& target);
