@@ -5,7 +5,6 @@
 #include <limits>
 #include <iostream>
 #include <vector>
-#include <random>
 
 class Player
 {
@@ -39,29 +38,4 @@ private:
 	void bulletMovement();
 };
 
-class BadGuys
-{
-public:
-	BadGuys();
-
-	void shoot();
-
-
-	void update(float x, float y);
-	void render(sf::RenderTarget& target);
-
-	const sf::FloatRect getBounds() const { return guys.getGlobalBounds(); }
-	const sf::RectangleShape getBadGuy() const { return guys; }
-private:
-	float m_speed;
-	int m_attackDamage;
-	int m_hp;
-	unsigned m_shots;
-	unsigned m_maxBullets;
-
-	sf::RectangleShape guys;
-	std::vector<sf::CircleShape> bullets;
-
-	void movement(float x, float y);
-};
 
