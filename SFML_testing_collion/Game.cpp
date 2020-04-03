@@ -9,7 +9,19 @@ void Game::initWindow()
 
 void Game::collion()
 {
-	
+	for (unsigned i = 0; i < guys.size(); i++)
+	{
+		if (player.getBullet().getGlobalBounds().intersects(guys[i].getBounds())) //bullets hit the enemy
+		{
+			guys.erase(guys.begin() + i);
+			guys.push_back(BadGuys());
+		}
+		else if (guys[i].getBadGuy().getPosition().x > window->getSize().x) //enemy goes off screen
+		{
+			guys.erase(guys.begin() + i);
+			guys.push_back(BadGuys());
+		}
+	}
 }
 
 Game::Game()
@@ -55,19 +67,11 @@ void Game::update()
 {
 	pollEvent();
 	player.update();
+	collion();
 
 	for (unsigned x = 0; x < guys.size(); x++)
 	{
-		collion();
-		if (guys.size() == 0 || guys[x].getBadGuy().getPosition().x > window->getSize().x)
-		{
-			guys.erase(guys.begin() + x);
-			guys.push_back(BadGuys());
-		}
-		else
-		{
-			guys[x].update(2.f, 0.0f);
-		}
+		guys[x].update(2.f, 0.0f);
 	}
 }
 

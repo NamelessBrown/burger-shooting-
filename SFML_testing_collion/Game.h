@@ -6,6 +6,16 @@
 
 class Game
 {
+public:
+	Game();
+	virtual ~Game();
+
+	const bool running() const { return m_running; }
+
+	void pollEvent();
+	void update();
+	void render();
+
 private:
 	bool m_running;
 
@@ -17,15 +27,5 @@ private:
 
 	void initWindow();
 	void collion();
-public:
-	Game();
-	virtual ~Game();
-
-	const bool running() const { return m_running; }
-
-	void pollEvent();
-	void update();
-	void render();
-
 };
 
