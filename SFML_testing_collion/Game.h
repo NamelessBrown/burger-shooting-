@@ -19,11 +19,11 @@ public:
 private:
 	bool m_running;
 
-	sf::RenderWindow* window;
-	sf::Event event;
+	sf::RenderWindow* m_window;
+	sf::Event m_event;
 
-	Player player;
-	std::vector<BadGuys> guys;
+	Player m_player;
+	std::vector<BadGuys> m_guys;
 
 	void initWindow();
 	void collion();

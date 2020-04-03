@@ -2,24 +2,24 @@
 
 void Game::initWindow()
 {
-	window = new sf::RenderWindow(sf::VideoMode::getDesktopMode(), "small game 01", sf::Style::Close);
-	window->setFramerateLimit(60); 
-	window->setVerticalSyncEnabled(true);
+	m_window = new sf::RenderWindow(sf::VideoMode::getDesktopMode(), "small game 01", sf::Style::Close);
+	m_window->setFramerateLimit(60); 
+	m_window->setVerticalSyncEnabled(true);
 }
 
 void Game::collion()
 {
-	for (unsigned i = 0; i < guys.size(); i++)
+	for (unsigned i = 0; i < m_guys.size(); i++)
 	{
-		if (player.getBullet().getGlobalBounds().intersects(guys[i].getBounds())) //bullets hit the enemy
+		if (m_player.getBullet().getGlobalBounds().intersects(m_guys[i].getBounds())) //bullets hit the enemy
 		{
-			guys.erase(guys.begin() + i);
-			guys.push_back(BadGuys());
+			m_guys.erase(m_guys.begin() + i);
+			m_guys.push_back(BadGuys());
 		}
-		else if (guys[i].getBadGuy().getPosition().x > window->getSize().x) //enemy goes off screen
+		else if (m_guys[i].getBadGuy().getPosition().x > m_window->getSize().x) //enemy goes off screen
 		{
-			guys.erase(guys.begin() + i);
-			guys.push_back(BadGuys());
+			m_guys.erase(m_guys.begin() + i);
+			m_guys.push_back(BadGuys());
 		}
 	}
 }
@@ -28,26 +28,26 @@ Game::Game()
 	:m_running(true)
 {
 	initWindow();
-	guys.push_back(BadGuys());
-	guys.push_back(BadGuys());
-	guys.push_back(BadGuys());
-	guys.push_back(BadGuys());
-	guys.push_back(BadGuys());
+	m_guys.push_back(BadGuys());
+	m_guys.push_back(BadGuys());
+	m_guys.push_back(BadGuys());
+	m_guys.push_back(BadGuys());
+	m_guys.push_back(BadGuys());
 }
 
 Game::~Game()
 {
-	delete window;
+	delete m_window;
 }
 
 void Game::pollEvent()
 {
-	while (window->pollEvent(event))
+	while (m_window->pollEvent(m_event))
 	{
-		switch (event.type)
+		switch (m_event.type)
 		{
 		case sf::Event::Closed:
-			window->close();
+			m_window->close();
 			break;
 		case sf::Event::KeyPressed:
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
@@ -66,24 +66,24 @@ void Game::pollEvent()
 void Game::update()
 {
 	pollEvent();
-	player.update();
+	m_player.update();
 	collion();
 
-	for (unsigned x = 0; x < guys.size(); x++)
+	for (unsigned x = 0; x < m_guys.size(); x++)
 	{
-		guys[x].update(2.f, 0.0f);
+		m_guys[x].update(2.f, 0.0f);
 	}
 }
 
 void Game::render()
 {
-	window->clear();
-	player.render(*window);
+	m_window->clear();
+	m_player.render(*m_window);
 
-	for (unsigned x = 0; x < guys.size(); x++)
+	for (unsigned x = 0; x < m_guys.size(); x++)
 	{
-		guys[x].render(*window);
+		m_guys[x].render(*m_window);
 	}
 
-	window->display();
+	m_window->display();
 }

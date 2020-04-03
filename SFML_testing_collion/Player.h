@@ -10,9 +10,9 @@ class Player
 public:
 	Player();
 
-	const sf::FloatRect getBounds() const { return player.getGlobalBounds(); }
-	const sf::RectangleShape getPlayer() const { return player; }
-	const sf::RectangleShape getBullet() const { return bullet; }
+	const sf::FloatRect getBounds() const { return m_player.getGlobalBounds(); }
+	const sf::RectangleShape getPlayer() const { return m_player; }
+	const sf::RectangleShape getBullet() const { return m_bullet; }
 
 	void update();
 	void render(sf::RenderTarget& target);
@@ -25,8 +25,8 @@ private:
 	int m_shots;
 	bool m_canReload;
 
-	sf::RectangleShape player;
-	sf::RectangleShape bullet;
+	sf::RectangleShape m_player;
+	sf::RectangleShape m_bullet;
 	sf::Text m_text;
 	sf::Font m_font;
 

@@ -4,13 +4,13 @@ Player::Player()
 	:m_armor(5), m_attackDamage(10), m_hp(100), m_speed(5.5f), m_shots(0), m_canReload(false), m_bulletSpeed(25.5f)
 {
 
-	player.setFillColor(sf::Color::Yellow);
-	player.setSize(sf::Vector2f(25.5f, 25.5f));
-	player.setPosition(sf::Vector2f(0.f, 250.f));
+	m_player.setFillColor(sf::Color::Yellow);
+	m_player.setSize(sf::Vector2f(25.5f, 25.5f));
+	m_player.setPosition(sf::Vector2f(0.f, 250.f));
 
-	bullet.setFillColor(sf::Color::Red);
-	bullet.setSize(player.getSize() / 2.f);
-	bullet.setPosition(player.getPosition());
+	m_bullet.setFillColor(sf::Color::Red);
+	m_bullet.setSize(m_player.getSize() / 2.f);
+	m_bullet.setPosition(m_player.getPosition());
 	//bullet.setScale(bullet.getScale() / 4.f);
 	//bullet.setPosition(player.getPosition());
 
@@ -26,11 +26,11 @@ void Player::movement()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
-		player.move(sf::Vector2f(0.f, -m_speed));
+		m_player.move(sf::Vector2f(0.f, -m_speed));
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 	{
-		player.move(sf::Vector2f(0.f, m_speed));
+		m_player.move(sf::Vector2f(0.f, m_speed));
 	}
 
 }
@@ -40,15 +40,15 @@ void Player::bulletMovement()
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !m_canReload)
 	{
 		m_shots++;
-		player.setFillColor(sf::Color::Blue);
-		bullet.setPosition(player.getPosition());
+		m_player.setFillColor(sf::Color::Blue);
+		m_bullet.setPosition(m_player.getPosition());
 	}
 	else
 	{
-		player.setFillColor(sf::Color::Yellow);
+		m_player.setFillColor(sf::Color::Yellow);
 	}
 
-	if (bullet.getPosition().x > 1000.f)
+	if (m_bullet.getPosition().x > 1000.f)
 	{
 		m_canReload = false;
 	}
@@ -76,12 +76,12 @@ void Player::render(sf::RenderTarget& target)
 {
 	target.draw(m_text);
 
-	if (bullet.getPosition().x < target.getSize().x) //laser effect
+	if (m_bullet.getPosition().x < target.getSize().x) //laser effect
 	{
-		bullet.move(sf::Vector2f(m_bulletSpeed, 0.0f));
-		target.draw(bullet);
+		m_bullet.move(sf::Vector2f(m_bulletSpeed, 0.0f));
+		target.draw(m_bullet);
 	} 
 
-	target.draw(player);
+	target.draw(m_player);
 
 }
