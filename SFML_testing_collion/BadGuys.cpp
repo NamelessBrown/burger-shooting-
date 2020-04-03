@@ -11,11 +11,12 @@ BadGuys::BadGuys()
 {
 	std::random_device rd;
 	std::mt19937 rng(rd());
-	std::uniform_real_distribution<float> distrubution(100.f, 250.f);
+	std::uniform_real_distribution<float> distrubutionX(25.f, 125.f);
+	std::uniform_real_distribution<float> distrubutionY(100.f, 750.f);
 
 	m_guys.setFillColor(sf::Color::Green);
 	m_guys.setSize(sf::Vector2f(25.5f, 25.5f));
-	m_guys.setPosition(sf::Vector2f(distrubution(rng), distrubution(rng)));
+	m_guys.setPosition(sf::Vector2f(distrubutionX(rng), distrubutionY(rng)));
 }
 
 void BadGuys::update(float x, float y)
