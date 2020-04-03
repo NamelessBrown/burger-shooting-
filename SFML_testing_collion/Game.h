@@ -18,6 +18,7 @@ public:
 
 private:
 	bool m_running;
+	int m_guysSpawner;
 
 	sf::RenderWindow* m_window;
 	sf::Event m_event;

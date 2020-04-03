@@ -25,14 +25,14 @@ void Game::collion()
 }
 
 Game::Game()
-	:m_running(true)
+	:m_running(true), m_guysSpawner(7)
 {
 	initWindow();
-	m_guys.push_back(BadGuys());
-	m_guys.push_back(BadGuys());
-	m_guys.push_back(BadGuys());
-	m_guys.push_back(BadGuys());
-	m_guys.push_back(BadGuys());
+
+	for (int i = 0; i < m_guysSpawner; i++)
+	{
+		m_guys.push_back(BadGuys());
+	}
 }
 
 Game::~Game()
