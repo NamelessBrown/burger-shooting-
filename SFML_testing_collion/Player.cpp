@@ -1,7 +1,7 @@
 #include "Player.h"
 
 Player::Player()
-	:m_armor(5), m_attackDamage(10), m_hp(100), m_speed(5.5f), m_spacePressed(false), m_shots(0), m_canReload(false), m_hitTheRKey(false)
+	:m_armor(5), m_attackDamage(10), m_hp(100), m_speed(5.5f), m_shots(0), m_canReload(false), m_bulletSpeed(25.5f)
 {
 
 	player.setFillColor(sf::Color::Yellow);
@@ -48,9 +48,13 @@ void Player::bulletMovement()
 		player.setFillColor(sf::Color::Yellow);
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::R) && m_canReload)
+	if (bullet.getPosition().x > 1000.f)
 	{
 		m_canReload = false;
+	}
+	else
+	{
+		m_canReload = true;
 	}
 
 }
@@ -72,11 +76,11 @@ void Player::render(sf::RenderTarget& target)
 {
 	target.draw(m_text);
 
-	while (bullet.getPosition().x < target.getSize().x)
+	if (bullet.getPosition().x < target.getSize().x) //laser effect
 	{
-		bullet.move(sf::Vector2f(m_speed, 0.0f));
+		bullet.move(sf::Vector2f(m_bulletSpeed, 0.0f));
 		target.draw(bullet);
-	}
+	} 
 
 	target.draw(player);
 
