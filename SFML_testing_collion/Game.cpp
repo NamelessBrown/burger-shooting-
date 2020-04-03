@@ -50,12 +50,10 @@ void Game::pollEvent()
 			m_window->close();
 			break;
 		case sf::Event::KeyPressed:
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape))
 			{
-				
+				m_window->close();
 			}
-			break;
-		case sf::Event::KeyReleased:
 			break;
 		}
 		
