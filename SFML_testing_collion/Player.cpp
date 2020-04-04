@@ -12,7 +12,7 @@ Player::Player()
 	m_player.setPosition(sf::Vector2f(0.f, 250.f));
 
 	m_bullet.setTexture(m_bulletTexture);
-	m_bullet.setScale(m_bullet.getScale() / 6.f);
+	m_bullet.setScale(m_bullet.getScale() / 14.f);
 	m_bullet.setPosition(m_player.getPosition());
 	//bullet.setScale(bullet.getScale() / 4.f);
 	//bullet.setPosition(player.getPosition());
