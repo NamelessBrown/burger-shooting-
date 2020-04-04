@@ -24,7 +24,7 @@ private:
 	sf::Event m_event;
 
 	Player m_player;
-	std::vector<BadGuys> m_guys;
+	std::vector<BadGuys*> m_guys;
 
 	void initWindow();
 	void collion();
