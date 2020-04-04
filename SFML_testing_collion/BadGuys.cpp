@@ -14,9 +14,17 @@ BadGuys::BadGuys()
 	std::uniform_real_distribution<float> distrubutionX(25.f, 125.f);
 	std::uniform_real_distribution<float> distrubutionY(100.f, 750.f);
 
-	m_guys.setFillColor(sf::Color::Green);
-	m_guys.setSize(sf::Vector2f(25.5f, 25.5f));
+	m_guyTexture = new sf::Texture();
+
+	m_guyTexture->loadFromFile("Textures/wieght.png");
+	m_guys.setTexture(*m_guyTexture);
+	m_guys.setScale(m_guys.getScale() / 14.f);
 	m_guys.setPosition(sf::Vector2f(distrubutionX(rng), distrubutionY(rng)));
+}
+
+BadGuys::~BadGuys()
+{
+	delete m_guyTexture;
 }
 
 void BadGuys::update(float x, float y)
