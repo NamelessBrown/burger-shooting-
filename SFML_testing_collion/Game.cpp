@@ -51,6 +51,8 @@ Game::~Game()
 
 void Game::pollEvent()
 {
+	m_deltaTime = m_clock.restart().asSeconds() * 60.f;
+
 	while (m_window->pollEvent(m_event))
 	{
 		switch (m_event.type)
@@ -73,12 +75,12 @@ void Game::pollEvent()
 void Game::update()
 {
 	pollEvent();
-	m_player.update();
+	m_player.update(m_deltaTime);
 	collion();
 
 	for (unsigned x = 0; x < m_guys.size(); x++)
 	{
-		m_guys[x]->update(2.f, 0.0f);
+		m_guys[x]->update(2.f, 0.0f, m_deltaTime);
 	}
 }
 

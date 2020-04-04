@@ -27,9 +27,9 @@ BadGuys::~BadGuys()
 	delete m_guyTexture;
 }
 
-void BadGuys::update(float x, float y)
+void BadGuys::update(float x, float y, float deltaTime)
 {
-	movement(x, y);
+	movement(x * deltaTime, y * deltaTime);
 }
 
 void BadGuys::render(sf::RenderTarget& target)

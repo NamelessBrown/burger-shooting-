@@ -25,15 +25,15 @@ Player::Player()
 
 }
 
-void Player::movement()
+void Player::movement(float deltaTime)
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
-		m_player.move(sf::Vector2f(0.f, -m_speed));
+		m_player.move(sf::Vector2f(0.f, -m_speed * deltaTime));
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 	{
-		m_player.move(sf::Vector2f(0.f, m_speed));
+		m_player.move(sf::Vector2f(0.f, m_speed * deltaTime));
 	}
 
 }
@@ -63,9 +63,9 @@ void Player::bulletMovement()
 
 }
 
-void Player::update()
+void Player::update(float deltaTime)
 {
-	movement();
+	movement(deltaTime);
 	bulletMovement();
 
 	std::stringstream ss;

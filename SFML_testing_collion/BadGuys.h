@@ -8,7 +8,7 @@ public:
 	BadGuys();
 	~BadGuys();
 
-	void update(float x, float y);
+	void update(float x, float y, float deltaTime);
 	void render(sf::RenderTarget& target);
 
 	const sf::FloatRect getBounds() const { return m_guys.getGlobalBounds(); }

@@ -14,7 +14,7 @@ public:
 	const sf::Sprite getPlayer() const { return m_player; }
 	const sf::Sprite getBullet() const { return m_bullet; }
 
-	void update();
+	void update(float deltaTime);
 	void render(sf::RenderTarget& target);
 private:
 	int m_armor;
@@ -33,7 +33,7 @@ private:
 	sf::Text m_text;
 	sf::Font m_font;
 
-	void movement();
+	void movement(float deltaTime);
 	void bulletMovement();
 };
 
