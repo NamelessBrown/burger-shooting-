@@ -20,6 +20,7 @@ private:
 
 	sf::Texture* m_guyTexture;
 	sf::Sprite m_guys;
+	sf::RectangleShape m_laser;
 
 	void movement(float x, float y);
 };
