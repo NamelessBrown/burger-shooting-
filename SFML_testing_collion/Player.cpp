@@ -3,13 +3,16 @@
 Player::Player()
 	:m_armor(5), m_attackDamage(10), m_hp(100), m_speed(5.5f), m_shots(0), m_canReload(false), m_bulletSpeed(25.5f)
 {
+	m_notShootingTexture.loadFromFile("Textures/bigboy.jpg");
+	m_shootingTexture.loadFromFile("Textures/smile.png");
+	m_bulletTexture.loadFromFile("Textures/br.jpg");
 
-	m_player.setFillColor(sf::Color::Yellow);
-	m_player.setSize(sf::Vector2f(25.5f, 25.5f));
+	m_player.setTexture(m_notShootingTexture);
+	m_player.setScale(m_player.getScale() / 6.f);
 	m_player.setPosition(sf::Vector2f(0.f, 250.f));
 
-	m_bullet.setFillColor(sf::Color::Red);
-	m_bullet.setSize(m_player.getSize() / 2.f);
+	m_bullet.setTexture(m_bulletTexture);
+	m_bullet.setScale(m_bullet.getScale() / 6.f);
 	m_bullet.setPosition(m_player.getPosition());
 	//bullet.setScale(bullet.getScale() / 4.f);
 	//bullet.setPosition(player.getPosition());
@@ -40,12 +43,12 @@ void Player::bulletMovement()
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !m_canReload)
 	{
 		m_shots++;
-		m_player.setFillColor(sf::Color::Blue);
+		m_player.setTexture(m_shootingTexture);
 		m_bullet.setPosition(m_player.getPosition());
 	}
 	else
 	{
-		m_player.setFillColor(sf::Color::Yellow);
+		m_player.setTexture(m_notShootingTexture);
 	}
 
 	if (m_bullet.getPosition().x > 1000.f)
@@ -54,6 +57,7 @@ void Player::bulletMovement()
 	}
 	else
 	{
+		m_player.setTexture(m_shootingTexture);
 		m_canReload = true;
 	}
 
@@ -66,7 +70,7 @@ void Player::update()
 
 	std::stringstream ss;
 	ss << "Armor = " << m_armor << '\n' << "Speed = " << m_speed << '\n' << "Attack Damage = " << m_attackDamage << '\n' << "Hp = " << m_hp << '\n'
-		<< "Lazer beans you shot: " << m_shots << '\n';
+		<< "burgers you shot: " << m_shots << '\n';
 
 	m_text.setString(ss.str());
 
