@@ -27,11 +27,11 @@ Player::Player()
 
 void Player::movement(float deltaTime)
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && m_player.getPosition().y >= 0)
 	{
 		m_player.move(sf::Vector2f(0.f, -m_speed * deltaTime));
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && m_player.getPosition().y <= 700)
 	{
 		m_player.move(sf::Vector2f(0.f, m_speed * deltaTime));
 	}
