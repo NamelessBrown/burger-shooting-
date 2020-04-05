@@ -13,6 +13,9 @@ BadGuys::BadGuys()
 	std::mt19937 rng(rd());
 	std::uniform_real_distribution<float> distrubutionX(25.f, 125.f);
 	std::uniform_real_distribution<float> distrubutionY(100.f, 750.f);
+	std::uniform_int_distribution<int> healthDistrubution(0, 15);
+
+	m_attackDamage = healthDistrubution(rng);
 
 	m_guyTexture.loadFromFile("Textures/wieght.png");
 	m_guys.setTexture(m_guyTexture);
