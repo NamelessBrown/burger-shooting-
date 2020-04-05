@@ -1,7 +1,7 @@
 #include "Player.h"
 
 Player::Player()
-	:m_armor(5), m_hp(100), m_speed(5.5f), m_shots(0), m_canReload(false), m_bulletSpeed(25.5f)
+	:m_hp(100), m_speed(5.5f), m_shots(0), m_canReload(false), m_bulletSpeed(25.5f), m_upgradeHp(m_hp - 25), m_maxHp(100)
 {
 	m_notShootingTexture.loadFromFile("Textures/bigboy.jpg");
 	m_shootingTexture.loadFromFile("Textures/smile.png");
@@ -63,13 +63,23 @@ void Player::bulletMovement()
 
 }
 
+void Player::Upgrade()
+{
+	if (m_shots > m_upgradeHp)
+	{
+		m_hp = m_maxHp;
+		m_maxHp = m_upgradeHp;
+		m_upgradeHp += 25;
+	}
+}
+
 void Player::update(float deltaTime)
 {
 	movement(deltaTime);
 	bulletMovement();
 
 	std::stringstream ss;
-	ss << "Armor = " << m_armor << '\n' << "Speed = " << m_speed << '\n' << "Hp = " << m_hp << '\n'
+	ss  << "Speed = " << m_speed << '\n' << "Hp = " << m_hp << '\n'
 		<< "burgers you shot: " << m_shots << '\n';
 
 	m_text.setString(ss.str());
