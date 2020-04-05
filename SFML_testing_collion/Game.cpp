@@ -22,6 +22,9 @@ void Game::collion()
 			delete m_guys[i];
 			m_guys.erase(m_guys.begin() + i);
 			m_guys.emplace_back(new BadGuys());
+
+			m_player.loseHp(10 - m_player.getArmor());
+
 		}
 	}
 }
@@ -80,7 +83,7 @@ void Game::update()
 
 	for (unsigned x = 0; x < m_guys.size(); x++)
 	{
-		m_guys[x]->update(2.f, 0.0f, m_deltaTime);
+		m_guys[x]->update(1.f, 0.0f, m_deltaTime);
 	}
 
 	if (m_music.getSong().getStatus() == sf::Music::Stopped)

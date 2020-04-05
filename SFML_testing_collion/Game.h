@@ -12,6 +12,7 @@ public:
 	virtual ~Game();
 
 	const bool running() const { return m_window->isOpen(); }
+	const bool GameOver() const { return m_player.getHp() > 0; }
 
 	void pollEvent();
 	void update();
