@@ -14,13 +14,17 @@ public:
 	const sf::Sprite getPlayer() const { return m_player; }
 	const sf::Sprite getBullet() const { return m_bullet; }
 
+	const int getArmor() const { return m_armor; }
+	const int getHp() const { return m_hp; }
+
+	const void loseHp(int loss) { m_hp -= loss; }
+
 	void update(float deltaTime);
 	void render(sf::RenderTarget& target);
 private:
 	int m_armor;
 	float m_speed;
 	float m_bulletSpeed;
-	int m_attackDamage;
 	int m_hp;
 	int m_shots;
 	bool m_canReload;
