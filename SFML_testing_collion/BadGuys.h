@@ -18,7 +18,7 @@ private:
 	int m_attackDamage;
 	int m_hp;
 
-	sf::Texture* m_guyTexture;
+	sf::Texture m_guyTexture;
 	sf::Sprite m_guys;
 	sf::RectangleShape m_laser;
 
