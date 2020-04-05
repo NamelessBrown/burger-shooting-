@@ -7,7 +7,7 @@ int main()
 {
 	Game game;
 
-	while (game.running())
+	while (game.running() && game.GameOver())
 	{
 		game.update();
 		game.render();
