@@ -23,7 +23,7 @@ void Game::collion()
 			m_guys.erase(m_guys.begin() + i);
 			m_guys.emplace_back(new BadGuys());
 
-			m_player.loseHp(10 - m_player.getArmor());
+			m_player.loseHp(m_guys[i]->getAttackDamage());
 
 		}
 	}
