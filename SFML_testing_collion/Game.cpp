@@ -2,7 +2,7 @@
 
 void Game::initWindow()
 {
-	m_window = new sf::RenderWindow(sf::VideoMode::getDesktopMode(), "small game 01", sf::Style::Close);
+	m_window = new sf::RenderWindow(sf::VideoMode::getDesktopMode(), "Burger shooter", sf::Style::Close);
 	m_window->setFramerateLimit(60); 
 	m_window->setVerticalSyncEnabled(true);
 }
@@ -15,13 +15,13 @@ void Game::collion()
 		{
 			delete m_guys[i];
 			m_guys.erase(m_guys.begin() + i);
-			m_guys.push_back(new BadGuys());
+			m_guys.emplace_back(new BadGuys());
 		}
 		else if (m_guys[i]->getBadGuy().getPosition().x > m_window->getSize().x) //enemy goes off screen
 		{
 			delete m_guys[i];
 			m_guys.erase(m_guys.begin() + i);
-			m_guys.push_back(new BadGuys());
+			m_guys.emplace_back(new BadGuys());
 		}
 	}
 }
@@ -33,7 +33,7 @@ Game::Game()
 
 	for (int i = 0; i < m_guysSpawner; i++)
 	{
-		m_guys.push_back(new BadGuys());
+		m_guys.emplace_back(new BadGuys());
 	}
 }
 
@@ -81,6 +81,11 @@ void Game::update()
 	for (unsigned x = 0; x < m_guys.size(); x++)
 	{
 		m_guys[x]->update(2.f, 0.0f, m_deltaTime);
+	}
+
+	if (m_music.getSong().getStatus() == sf::Music::Stopped)
+	{
+		m_music.Play();
 	}
 }
 

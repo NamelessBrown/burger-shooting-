@@ -3,6 +3,7 @@
 #include <cmath>
 #include "Player.h"
 #include "BadGuys.h"
+#include "Music.h"
 
 class Game
 {
@@ -10,7 +11,7 @@ public:
 	Game();
 	virtual ~Game();
 
-	const bool running() const { return m_running; }
+	const bool running() const { return m_window->isOpen(); }
 
 	void pollEvent();
 	void update();
@@ -28,6 +29,7 @@ private:
 
 	Player m_player;
 	std::vector<BadGuys*> m_guys;
+	Music m_music;
 
 	void initWindow();
 	void collion();
