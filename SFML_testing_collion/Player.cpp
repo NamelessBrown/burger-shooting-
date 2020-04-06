@@ -77,6 +77,7 @@ void Player::update(float deltaTime)
 {
 	movement(deltaTime);
 	bulletMovement();
+	Upgrade();
 
 	std::stringstream ss;
 	ss  << "Speed = " << m_speed << '\n' << "Hp = " << m_hp << '\n'
