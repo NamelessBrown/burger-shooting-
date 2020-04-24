@@ -13,15 +13,15 @@ void Game::collion()
 	{
 		if (m_player.getBullet().getGlobalBounds().intersects(m_guys[i]->getBounds())) //bullets hit the enemy
 		{
-			delete m_guys[i];
+			m_guys[i].reset();
 			m_guys.erase(m_guys.begin() + i);
-			m_guys.emplace_back(new BadGuys());
+			m_guys.emplace_back(new BadGuys(m_badGuyTexture));
 		}
 		else if (m_guys[i]->getBadGuy().getPosition().x > m_window->getSize().x) //enemy goes off screen
 		{
-			delete m_guys[i];
+			m_guys[i].reset();
 			m_guys.erase(m_guys.begin() + i);
-			m_guys.emplace_back(new BadGuys());
+			m_guys.emplace_back(new BadGuys(m_badGuyTexture));
 
 			m_player.loseHp(m_guys[i]->getAttackDamage());
 
@@ -33,18 +33,19 @@ Game::Game()
 	:m_running(true), m_guysSpawner(7)
 {
 	initWindow();
+	m_badGuyTexture.loadFromFile("Textures/wieght.png");
 
 	for (int i = 0; i < m_guysSpawner; i++)
 	{
-		m_guys.emplace_back(new BadGuys());
+		m_guys.emplace_back(new BadGuys(m_badGuyTexture));
 	}
 }
 
 Game::~Game()
 {
-	for (auto& i : m_guys) //Deletes all whats left in the vector, then delete the vector
+	for (auto& e : m_guys)
 	{
-		delete i;
+		e.reset();
 	}
 
 	m_guys.clear();

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cmath>
+#include <memory>
 #include "Player.h"
 #include "BadGuys.h"
 #include "Music.h"
@@ -26,10 +27,10 @@ private:
 	sf::RenderWindow* m_window;
 	sf::Event m_event;
 	sf::Clock m_clock;
-
+	sf::Texture m_badGuyTexture;
 
 	Player m_player;
-	std::vector<BadGuys*> m_guys;
+	std::vector<std::unique_ptr<BadGuys>> m_guys;
 	Music m_music;
 
 	void initWindow();
