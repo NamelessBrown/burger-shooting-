@@ -6,8 +6,8 @@ void BadGuys::movement(float x, float y)
 	m_guys.move(x, y);
 }
 
-BadGuys::BadGuys()
-	:m_speed(1.f)
+BadGuys::BadGuys(sf::Texture& guy)
+	:m_speed(1.f), m_guyTexture(guy)
 {
 	std::random_device rd;
 	std::mt19937 rng(rd());
@@ -17,7 +17,6 @@ BadGuys::BadGuys()
 
 	m_attackDamage = healthDistrubution(rng);
 
-	m_guyTexture.loadFromFile("Textures/wieght.png");
 	m_guys.setTexture(m_guyTexture);
 	m_guys.setScale(m_guys.getScale() / 14.f);
 	m_guys.setPosition(sf::Vector2f(distrubutionX(rng), distrubutionY(rng)));
@@ -25,6 +24,7 @@ BadGuys::BadGuys()
 
 BadGuys::~BadGuys()
 {
+
 }
 
 void BadGuys::update(float x, float y, float deltaTime)

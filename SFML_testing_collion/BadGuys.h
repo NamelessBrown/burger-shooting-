@@ -5,7 +5,7 @@
 class BadGuys
 {
 public:
-	BadGuys();
+	BadGuys(sf::Texture& guy);
 	~BadGuys();
 
 	void update(float x, float y, float deltaTime);
@@ -19,7 +19,7 @@ private:
 	float m_speed;
 	int m_attackDamage;
 
-	sf::Texture m_guyTexture;
+	sf::Texture& m_guyTexture;
 	sf::Sprite m_guys;
 
 	void movement(float x, float y);
